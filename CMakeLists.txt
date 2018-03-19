@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+
 set(VER 0.0.1)
 if($ENV{TRAVIS_BUILD_NUMBER})
     set(VER 0.0.$ENV{TRAVIS_BUILD_NUMBER})
@@ -9,6 +11,8 @@ project(ip_filter VERSION ${VER})
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+add_library(filter filter.cpp)
 
 add_executable(${PROJECT_NAME} ip_filter.cpp)
 
@@ -23,8 +27,12 @@ set_target_properties(test_${PROJECT_NAME} PROPERTIES
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 
+target_link_libraries(${PROJECT_NAME}
+    filter)
+
 target_link_libraries(test_${PROJECT_NAME}
-    ${Boost_LIBRARIES})
+    ${Boost_LIBRARIES}
+    filter)
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
