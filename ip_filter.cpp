@@ -1,5 +1,3 @@
-//#include <cassert>
-//#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,7 +9,7 @@ int main(int argc, char const *argv[])
 {
     try
     {
-        std::vector<std::vector<int>> ip_pool;
+        std::vector<ipvec> ip_pool;
 
         for(std::string line; std::getline(std::cin, line);)
         {

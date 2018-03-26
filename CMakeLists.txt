@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++14")
 
 set(VER 0.0.1)
 if($ENV{TRAVIS_BUILD_NUMBER})
@@ -24,6 +24,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
     COMPILE_OPTIONS -Wpedantic -Wall -Wextra)
 
 set_target_properties(test_${PROJECT_NAME} PROPERTIES
+    CXX_STANDARD 14
+    CXX_STANDARD_REQUIRED ON
+    COMPILE_OPTIONS -Wpedantic -Wall -Wextra
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR})
 
@@ -48,4 +51,7 @@ include(CPack)
 
 enable_testing()
 
-add_test(test_version_valid test_${PROJECT_NAME})
+add_test(test_split_function test_${PROJECT_NAME})
+add_test(test_filter_function test_${PROJECT_NAME})
+add_test(test_filter2_function test_${PROJECT_NAME})
+add_test(test_filter_any_function test_${PROJECT_NAME})
