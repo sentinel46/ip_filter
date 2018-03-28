@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
             ip_pool.push_back(split(v, '.'));
         }
 
-        process(ip_pool);
+        print_pool(process3(ip_pool));
     }
     catch(const std::exception &e)
     {

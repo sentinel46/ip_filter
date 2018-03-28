@@ -1,6 +1,7 @@
 #define BOOST_TEST_MODULE test_ip_filter
 
 #include "filter.h"
+#include <iostream>
 
 #include <boost/test/unit_test.hpp>
 
@@ -113,6 +114,68 @@ BOOST_AUTO_TEST_CASE(test_filter_any_function)
     result.push_back(split("46.70.225.39", '.'));
     result.push_back(split("58.161.46.202", '.'));
     BOOST_CHECK(filter_any(test, 46) == result);
+}
+
+BOOST_AUTO_TEST_CASE(test_process_function)
+{
+    std::vector<ipvec> test;
+    BOOST_CHECK(process2(test).empty());
+    BOOST_CHECK(process3(test).empty());
+
+    test.push_back(split("1.231.69.33", '.'));
+    auto result = test;
+    result.push_back(split("1.231.69.33", '.'));
+    BOOST_CHECK(process2(test) == result);
+    BOOST_CHECK(process3(test) == result);
+
+    test.clear();
+    test.push_back(split("asd", '.'));
+    result.clear();
+    result.push_back(split("asd", '.'));
+    BOOST_CHECK(process2(test) == result);
+    BOOST_CHECK(process3(test) == result);
+
+    test.clear();
+    test.push_back(split("1.231.69.33", '.'));
+    test.push_back(split("1.87.203.225", '.'));
+    test.push_back(split("1.1.234.8", '.'));
+    test.push_back(split("186.204.34.46", '.'));
+    test.push_back(split("186.46.222.194", '.'));
+    test.push_back(split("46.70.225.39", '.'));
+    test.push_back(split("46.70.147.26", '.'));
+    test.push_back(split("1.70.44.170", '.'));
+    test.push_back(split("1.29.168.152", '.'));
+    test.push_back(split("46.70.113.73", '.'));
+    test.push_back(split("46.70.29.76", '.'));
+    result.clear();
+    result.push_back(split("186.204.34.46", '.'));
+    result.push_back(split("186.46.222.194", '.'));
+    result.push_back(split("46.70.225.39", '.'));
+    result.push_back(split("46.70.147.26", '.'));
+    result.push_back(split("46.70.113.73", '.'));
+    result.push_back(split("46.70.29.76", '.'));
+    result.push_back(split("1.231.69.33", '.'));
+    result.push_back(split("1.87.203.225", '.'));
+    result.push_back(split("1.70.44.170", '.'));
+    result.push_back(split("1.29.168.152", '.'));
+    result.push_back(split("1.1.234.8", '.'));
+    result.push_back(split("1.231.69.33", '.'));
+    result.push_back(split("1.87.203.225", '.'));
+    result.push_back(split("1.70.44.170", '.'));
+    result.push_back(split("1.29.168.152", '.'));
+    result.push_back(split("1.1.234.8", '.'));
+    result.push_back(split("46.70.225.39", '.'));
+    result.push_back(split("46.70.147.26", '.'));
+    result.push_back(split("46.70.113.73", '.'));
+    result.push_back(split("46.70.29.76", '.'));
+    result.push_back(split("186.204.34.46", '.'));
+    result.push_back(split("186.46.222.194", '.'));
+    result.push_back(split("46.70.225.39", '.'));
+    result.push_back(split("46.70.147.26", '.'));
+    result.push_back(split("46.70.113.73", '.'));
+    result.push_back(split("46.70.29.76", '.'));
+    BOOST_CHECK(process2(test) == result);
+    BOOST_CHECK(process3(test) == result);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
