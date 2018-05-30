@@ -7,20 +7,17 @@
 
 int main(int argc, char const *argv[])
 {
-    try
-    {
+    try {
         std::vector<ipvec> ip_pool;
 
-        for(std::string line; std::getline(std::cin, line);)
-        {
+        for(std::string line; std::getline(std::cin, line);) {
             auto v = line.substr(0, line.find_first_of('\t'));
             ip_pool.push_back(split(v, '.'));
         }
 
-        print_pool(process3(ip_pool));
+        process(ip_pool);
     }
-    catch(const std::exception &e)
-    {
+    catch(const std::exception &e) {
         std::cerr << e.what() << std::endl;
     }
 

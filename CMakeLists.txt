@@ -51,7 +51,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(test_split_function test_${PROJECT_NAME})
-add_test(test_filter_function test_${PROJECT_NAME})
-add_test(test_filter2_function test_${PROJECT_NAME})
-add_test(test_filter_any_function test_${PROJECT_NAME})
+add_test(test_${PROJECT_NAME} test_${PROJECT_NAME})
